@@ -1,231 +1,202 @@
-﻿# TruthVsNoise
 
-# Truth vs Noise Platform
+# Truth vs Noise
 
-A credibility-weighted community fact-evaluation platform designed to distinguish truth from misinformation using structured claims, community voting, and role-based verification.
+A credibility-weighted community platform to evaluate facts, filter misinformation, and amplify truth.
 
-> Not all votes are equal — credibility matters.
+## 📋 Project Overview
 
----
+Truth vs Noise is a full-stack MERN (MongoDB, Express.js, React, Node.js) application designed to combat misinformation by implementing a dual voting system:
+- **Raw Community Votes** - Popularity-based voting where every vote counts as 1
+- **Credibility-Weighted Votes** - Expertise-based voting where votes are weighted by domain credibility
 
-## Live Status
+The platform helps users distinguish between what the general population thinks (popularity) and what domain experts believe (truth).
 
-Currently under active development.
+## 🎯 Key Features
 
----
+### User Authentication & Profiles
+- User registration with profession and domain expertise
+- JWT-based authentication
+- Role-based access control (User/Admin)
+- Domain credibility scoring system
 
-## Problem Statement
+### Claim Management
+- Submit claims for community evaluation
+- Categorize claims by domain (Health, Technology, Politics, Science)
+- Attach supporting evidence URLs
 
-Modern social platforms treat every opinion equally, allowing misinformation to spread rapidly through mass voting.
-Truth vs Noise solves this by introducing credibility-weighted voting, ensuring that expertise and verified knowledge have greater influence.
+### Voting System
+- **Dual Voting Mechanism**:
+  - Raw Votes: Each vote = 1 point (popularity)
+  - Weighted Votes: Votes weighted by user's domain credibility
+- Real-time voting results with visual comparisons
+- Prevents duplicate voting
 
----
+### Credibility System
+- Base credibility score for all users
+- Domain-specific credibility scores
+- Cross-domain expertise transfer matrix
 
-## Key Features
+### Admin Panel
+- User verification and credibility management
+- Domain expertise assignment
+- System oversight and moderation
 
-### Authentication and Roles
-
-* JWT-based authentication
-* Role-based access control:
-
-  * User
-  * Admin (Single Super Admin)
-
-### Claim Submission
-
-* Users submit claims under specific domains
-* Claims are open for public evaluation
-
-### Community Voting
-
-* Raw voting (equal weight)
-* Weighted voting (credibility-based)
-
-### Credibility Scoring
-
-* Base credibility per user
-* Domain-specific credibility scores
-* Final truth score computed using weighted logic
-
-### Admin Verification
-
-* Admin verifies user proofs
-* Assigns credibility scores
-* Controls platform trust level
-
----
-
-## System Architecture
-
-```text
-Frontend (React + Vite)
-        ↓
- REST APIs (Axios)
-        ↓
-Backend (Node.js + Express)
-        ↓
-Authentication (JWT)
-        ↓
-Database (MongoDB)
-```
-
----
-
-## Tech Stack
+## 🏗️ Tech Stack
 
 ### Frontend
-
-* React.js
-* React Router
-* Axios
-* CSS (Custom Responsive UI)
+- **React.js** - Modern UI framework
+- **React Router** - Client-side routing
+- **Axios** - HTTP client
+- **CSS3** - Styling and responsive design
 
 ### Backend
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB object modeling
+- **JWT** - Token-based authentication
+- **Bcrypt** - Password hashing
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-* JWT Authentication
-* bcryptjs
-* Morgan
+### Development Tools
+- **Nodemon** - Development server with hot reloading
+- **Dotenv** - Environment variable management
 
----
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-TruthVsNoise/
+truth-vs-noise/
 ├── backend/
 │   ├── src/
+│   │   ├── config/
 │   │   ├── controllers/
+│   │   ├── middleware/
 │   │   ├── models/
 │   │   ├── routes/
-│   │   ├── middleware/
+│   │   ├── utils/
 │   │   ├── app.js
 │   │   └── server.js
-│
-├── frontend/
-│   ├── src/
-│   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── api/
-│   │   ├── styles/
-│   │   └── App.jsx
-│
-└── README.md
+│   ├── .env
+│   ├── package.json
+│   └── ...
+└── frontend/
+    ├── src/
+    │   ├── api/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── routes/
+    │   ├── styles/
+    │   ├── App.jsx
+    │   └── main.jsx
+    ├── package.json
+    └── ...
 ```
 
----
+## 🚀 Getting Started
 
-## Authentication Flow
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or cloud instance)
+- npm or yarn package manager
 
-1. User or Admin logs in
-2. Backend validates credentials
-3. Server responds with:
+### Installation
 
-```json
-{
-  "token": "JWT_TOKEN",
-  "role": "user | admin"
-}
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/truth-vs-noise.git
+   cd truth-vs-noise
+   ```
 
-4. Frontend stores token and role
-5. UI and routes adapt based on role
+2. **Backend Setup**
+   ```bash
+   cd backend
+   npm install
+   ```
 
----
+3. **Frontend Setup**
+   ```bash
+   cd ../frontend
+   npm install
+   ```
 
-## Credibility Algorithm (Simplified)
+4. **Environment Configuration**
+   Create a `.env` file in the backend directory:
+   ```env
+   PORT=5000
+   MONGO_URI=mongodb://127.0.0.1:27017/truth_vs_noise
+   JWT_SECRET=your_jwt_secret_here
+   JWT_EXPIRES=7d
+   ```
 
-```text
-Weighted Vote = User Credibility × Vote Value
+### Running the Application
 
-Final Truth Score =
-(Sum of Weighted Votes) / (Total Credibility)
-```
+1. **Start MongoDB** (if using local instance)
 
-* Experts influence results more
-* Reduces fake or mass voting impact
+2. **Start Backend Server**
+   ```bash
+   cd backend
+   npm start
+   # or for development with auto-reload
+   npm run dev
+   ```
 
----
+3. **Start Frontend Development Server**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
-## Security Measures
+4. **Access the Application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000
 
-* JWT authorization headers
-* Protected frontend routes
-* Backend admin middleware
-* Single admin enforcement
-* Password hashing using bcrypt
+## 📊 Voting System Explained
 
----
+### Raw Voting (Popularity-Based)
+- Every user vote counts as 1 point
+- Shows what the general population believes
+- Simple democratic approach
 
-## API Testing
+### Weighted Voting (Expertise-Based)
+- Votes are weighted by user's domain credibility
+- Verified users with domain expertise contribute more
+- Helps identify expert consensus vs popular opinion
 
-All APIs are tested using Postman.
+### Domain Credibility Matrix
+Cross-domain expertise transfer:
+- Health ↔ Science: 70% transfer
+- Technology ↔ Science: 60% transfer
+- Politics ↔ Technology: 30% transfer
+- And more...
 
-Authorization Header:
+## 👥 User Roles
 
-```
-Authorization: Bearer <JWT_TOKEN>
-```
+### Regular Users
+- Register and create profiles
+- Submit claims for evaluation
+- Vote on existing claims
+- View voting results and comparisons
 
-Endpoints tested:
 
-* Authentication
-* Claims
-* Voting
-* Admin verification
 
----
+## 🔐 Security Features
 
-## Setup and Installation
+- Password hashing with bcrypt
+- JWT token-based authentication
+- Role-based access control
+- Input validation and sanitization
+- Protected routes and middleware
 
-### Backend
+## 📈 Future Enhancements
 
-```bash
-cd backend
-npm install
-npm run dev
-```
+- Real-time voting updates with WebSockets
+- Advanced analytics and reporting
+- Mobile application development
+- Social sharing features
+- Enhanced admin dashboard
+- Machine learning for credibility scoring
 
-### Frontend
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
 
----
 
-## Future Enhancements
 
-* AI-assisted fact checking
-* Reputation decay over time
-* Public credibility leaderboards
-* Claim source validation
-* Real-time vote updates using Socket.IO
-
----
-
-## Internship Context
-
-* Internship: Yellow Network
-* Project Type: Full Stack Web Application
-* Project Title: Truth vs Noise Platform
-* Submission Date: 16/12/2025
-
----
-
-## Author
-
-Srinithija
-Full Stack Developer Intern
-Yellow Network
-
----
-
-## Final Note
-
-This project demonstrates secure authentication, role-based access control, credibility-driven algorithms, and full-stack system design to address real-world misinformation challenges.
+You can save this as `README.md` in your project root directory. This will help anyone who wants to understand, use, or contribute to your Truth vs Noise project.
