@@ -21,6 +21,36 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
+// update domain credibility
+exports.updateDomainCredibility = async (req, res) => {
+  try {
+    const { domainCredibility } = req.body;
+    
+    // Validate domain credibility format
+    if (!Array.isArray(domainCredibility)) {
+      return res.status(400).json({ message: "domainCredibility must be an array" });
+    }
+    
+    // Validate each entry
+    for (const entry of domainCredibility) {
+      if (!entry.domain || typeof entry.score !== 'number') {
+        return res.status(400).json({ message: "Each entry must have domain and score" });
+      }
+      if (entry.score < 0 || entry.score > 100) {
+        return res.status(400).json({ message: "Score must be between 0 and 100" });
+      }
+    }
+    
+    req.user.domainCredibility = domainCredibility;
+    await req.user.save();
+    
+    res.json({ message: "Domain credibility updated", user: req.user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // optional: get credibility for a user (public)
 exports.getCredibility = async (req, res) => {
   try {

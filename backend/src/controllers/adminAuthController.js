@@ -1,4 +1,4 @@
-const Admin = require("../models/Admin");
+const Admin = require("../models/admin");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -17,12 +17,14 @@ exports.adminLogin = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: admin._id, role: "admin" },
+      { id: admin._id, type: "admin" },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
-
-    res.json({ token });
+   res.json({
+    token,
+    role: "admin",
+  });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

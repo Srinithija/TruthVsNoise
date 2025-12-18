@@ -1,0 +1,62 @@
+.voting-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.claims-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.claim-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.2s all;
+}
+
+.claim-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.claim-card.selected {
+  border: 2px solid #007bff;
+}
+
+.claim-card.voted {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.vote-actions {
+  text-align: center;
+  border: 1px solid #007bff;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #f7f9fc;
+}
+
+.vote-actions button {
+  margin: 0.5rem;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.vote-true {
+  background-color: #28a745;
+  color: white;
+}
+
+.vote-false {
+  background-color: #dc3545;
+  color: white;
+}

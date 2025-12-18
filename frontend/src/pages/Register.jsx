@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Register.css";
 import { registerUser } from "../api/authApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Add useNavigate
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,8 @@ const Register = () => {
     otherDomain: "",
     proof: "",
   });
+  
+  const navigate = useNavigate(); // Add navigate hook
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -84,6 +86,9 @@ const Register = () => {
       const response = await registerUser(finalData);
       alert(response.data.message);
       console.log("Registered:", response.data);
+      
+      // After successful registration, redirect to login
+      navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
     } finally {
@@ -172,9 +177,7 @@ const Register = () => {
               <option value="health">Health</option>
               <option value="politics">Politics</option>
               <option value="science">Science</option>
-              <option value="finance">Finance</option>
-              <option value="education">Education</option>
-              <option value="people">People</option>
+             
               <option value="other">Other</option>
             </select>
             {errors.domain && <span className="error">{errors.domain}</span>}

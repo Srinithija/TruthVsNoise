@@ -1,15 +1,35 @@
-// src/utils/credibilityCalculator.js
-// returns credibility (0..1) from user object for given domain
-exports.getCredibilityForDomain = (user, domain) => {
-  if (!user) return 0.0;
-  // user.domainCredibility expected as [{domain, score}] where score 0..100
-  if (Array.isArray(user.domainCredibility)) {
-    const d = user.domainCredibility.find(x => x.domain.toLowerCase() === domain.toLowerCase());
-    if (d) return Math.min(Math.max(d.score / 100, 0), 1); // normalize to 0..1
+const domainWeights = require("./domainWeights");
+
+// returns credibility (0..1)
+exports.getCredibilityForDomain = (user, claimDomain) => {
+  if (!user ) return 0.0;
+
+  claimDomain = claimDomain.toLowerCase();
+
+  // user.domainCredibility: [{ domain, score }]
+  if (!Array.isArray(user.domainCredibility)) {
+    return Math.min(user.baseCredibility / 100, 1);
   }
-  // fallback to baseCredibility default (0..100) -> normalize
-  if (user.baseCredibility !== undefined) {
-    return Math.min(Math.max(user.baseCredibility / 100, 0), 1);
+
+  let finalWeight = 0;
+
+  for (const d of user.domainCredibility) {
+    const userDomain = d.domain.toLowerCase();
+    const userScore = Math.min(Math.max(d.score / 100, 0), 1);
+
+    // Check cross-domain relevance
+    const multiplier =
+      domainWeights[userDomain]?.[claimDomain] ?? 0;
+
+    const weightedScore = userScore * multiplier;
+
+    finalWeight = Math.max(finalWeight, weightedScore);
   }
-  return 0.3; // absolute fallback
+
+  // fallback to base credibility (low influence)
+  if (finalWeight === 0) {
+    finalWeight = Math.min(user.baseCredibility / 100, 0.3);
+  }
+
+  return Number(finalWeight.toFixed(2));
 };

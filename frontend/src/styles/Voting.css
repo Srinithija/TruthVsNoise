@@ -1,0 +1,439 @@
+/* Voting.css - Ultra Stylish Light Theme (Matching the App) */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.voting-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Poppins', sans-serif;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Background Shapes */
+.voting-page::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+  top: -200px;
+  right: -150px;
+  border-radius: 50%;
+  animation: floatShape 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+.voting-page::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  border-radius: 50%;
+  animation: floatShape 15s ease-in-out infinite reverse;
+  z-index: 0;
+}
+
+@keyframes floatShape {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(30px, -30px) scale(1.1); opacity: 0.8; }
+}
+
+/* Page Header */
+.voting-page h1 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  animation: slideInUp 0.8s ease-out;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 50px;
+  font-weight: 400;
+}
+
+/* Claim List Grid */
+.claim-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto 60px auto;
+  z-index: 1;
+  position: relative;
+}
+
+/* Individual Claim Card */
+.claim-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.claim-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 100%;
+  animation: gradientMove 4s ease infinite;
+  border-radius: 24px 24px 0 0;
+}
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 0%; }
+}
+
+.claim-card.active,
+.claim-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(139, 92, 246, 0.15);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.domain,
+.status {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.domain {
+  background: rgba(139, 92, 246, 0.15);
+  color: #8b5cf6;
+}
+
+.status {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.status.verified { background: #dcfce7; color: #166534; }
+.status.debunked { background: #fee2e2; color: #991b1b; }
+.status.pending { background: #fef3c7; color: #92400e; }
+
+.claim-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.author {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.claim-card a {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.claim-card a:hover {
+  text-decoration: underline;
+}
+
+/* Selected Claim Detail Section */
+.detail {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
+  position: relative;
+  z-index: 1;
+  animation: slideInUp 0.9s ease-out;
+}
+
+.detail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 30px 30px 0 0;
+  background-size: 200% 100%;
+  animation: gradientMove 3s ease infinite;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.detail-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.detail-header p {
+  font-size: 17px;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+.badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* Voting Buttons */
+.vote-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.vote-actions button {
+  padding: 18px 36px;
+  border: none;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  min-width: 160px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vote-actions button:first-child { background: #86efac; color: #166534; } /* TRUE */
+.vote-actions button:nth-child(2) { background: #fca5a5; color: #991b1b; } /* FALSE */
+.vote-actions button:last-child { background: #fde68a; color: #92400e; } /* UNSURE */
+
+.vote-actions button:hover:not(:disabled) {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
+.vote-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Results Panels */
+.results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 50px 0;
+}
+
+.panel {
+  background: #f8fafc;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.panel h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.bar {
+  height: 50px;
+  background: #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.bar-segment {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 60px;
+}
+
+.bar-segment.raw.true { background: #86efac; }
+.bar-segment.raw.false { background: #fca5a5; }
+.bar-segment.raw.unsure { background: #fde68a; color: #92400e; }
+
+.bar-segment.weighted.true { background: #a7f3d0; }
+.bar-segment.weighted.false { background: #fecaca; }
+.bar-segment.weighted.unsure { background: #fef3c7; color: #92400e; }
+
+.legend {
+  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+/* Insight & Final Verdict */
+.insight {
+  background: linear-gradient(135deg, #e0e7ff 0%, #fde68a22 100%);
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4c1d95;
+  margin: 40px 0;
+  border: 1px solid #c4b5fd;
+}
+
+.final {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 40px 0 30px;
+}
+
+.comparison-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.comparison-text p {
+  margin-bottom: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .results {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 968px) {
+  .voting-page h1 {
+    font-size: 38px;
+  }
+
+  .detail {
+    padding: 40px;
+  }
+
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .badges {
+    align-items: flex-start;
+  }
+
+  .vote-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .vote-actions button {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .voting-page {
+    padding: 20px;
+  }
+
+  .claim-list {
+    grid-template-columns: 1fr;
+  }
+
+  .claim-card {
+    padding: 24px;
+  }
+
+  .detail {
+    padding: 30px 20px;
+    border-radius: 24px;
+  }
+
+  .detail-header h2 {
+    font-size: 28px;
+  }
+
+  .panel {
+    padding: 24px;
+  }
+
+  .final {
+    font-size: 24px;
+  }
+}

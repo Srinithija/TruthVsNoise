@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../styles/Login.css";
 import { Link, useNavigate  } from "react-router-dom";
 import axios from "axios";
+import { loginUser } from "../api/authApi"; // Import the login function
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -18,15 +20,18 @@ const Login = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  try {
-    const response = await axios.post(
-      "http://localhost:5000/api/auth/login",
-      formData
-    );
+try {
+    const response = await loginUser(formData); // Use the API function
 
-    // ✅ STORE TOKEN AND ROLE
+    // ✅ STORE TOKEN, ROLE, AND USER DATA
     localStorage.setItem("token", response.data.token);
-    localStorage.setItem("role", response.data.role);
+    localStorage.setItem("role", response.data.role || "user");
+    
+    // Store user data if available
+    if (response.data.user) {
+      localStorage.setItem("name", response.data.user.name);
+      localStorage.setItem("profession", response.data.user.profession);
+    }
 
     // Redirect to dashboard
     navigate("/dashboard");

@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
-  const role = localStorage.getItem("role"); // "admin" or "user"
+  const name = localStorage.getItem("name");
+const profession = localStorage.getItem("profession");
+  const role = localStorage.getItem("role"); // Get role from localStorage
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("name");
+    localStorage.removeItem("profession");
     window.location.href = "/";
   };
 
@@ -14,16 +19,26 @@ const Dashboard = () => {
     <div className="dashboard-container">
       {/* Top Navbar */}
       <nav className="dashboard-nav">
-        <h2>Truth vs Noise</h2>
-        <div className="nav-right">
-          <span className="role-badge">
+  <h2>Truth vs Noise</h2>
+  <div className="nav-links">
+    <Link to="/dashboard" className="nav-link">Dashboard</Link>
+    <Link to="/create-claim" className="nav-link">Create Claim</Link>
+    <Link to="/voting" className="nav-link">Voting</Link>
+    <Link to="/score" className="nav-link">Scoring</Link>
+  </div>
+  <div className="nav-right">
+   <div className="user-info">
+  <span className="user-name">{name || "User"}</span>
+  <span className="user-profession">{profession || "Member"}</span>
+</div>
+ <span className="role-badge">
             {role === "admin" ? "Admin" : "User"}
           </span>
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+    <button className="logout-btn" onClick={handleLogout}>
+      Logout
+    </button>
+  </div>
+</nav>
 
       {/* Main Content */}
       <div className="dashboard-content">
@@ -41,7 +56,7 @@ const Dashboard = () => {
           </Link>
 
           {/* Community Voting */}
-          <Link to="/claims" className="dashboard-card">
+          <Link to="/voting" className="dashboard-card">
             <h3>🗳 Community Voting</h3>
             <p>Vote on claims using credibility-weighted logic.</p>
           </Link>
@@ -51,19 +66,8 @@ const Dashboard = () => {
             <h3>📊 Credibility Score</h3>
             <p>View truth vs noise breakdown.</p>
           </Link>
-
-          {/* Admin Panel – ONLY ADMIN */}
-          {role === "admin" ? (
-            <Link to="/admin" className="dashboard-card admin-card">
-              <h3>👮 Admin Panel</h3>
-              <p>Verify users and manage credibility.</p>
-            </Link>
-          ) : (
-            <div className="dashboard-card disabled">
-              <h3>👮 Admin Panel</h3>
-              <p>Only accessible to admin</p>
-            </div>
-          )}
+          
+          
         </div>
       </div>
     </div>

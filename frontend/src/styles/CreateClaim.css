@@ -1,135 +1,292 @@
-/* Page Container */
-.create-claim-container {
+/* CreateClaim.css - Ultra Stylish Light Theme (Matching the App) */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.claim-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #020617);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Poppins', sans-serif;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  font-family: "Inter", sans-serif;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Card */
-.create-claim-card {
-  background: #020617;
+/* Animated Background Shapes */
+.claim-page::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+  top: -200px;
+  right: -150px;
+  border-radius: 50%;
+  animation: floatShape 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+.claim-page::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  border-radius: 50%;
+  animation: floatShape 15s ease-in-out infinite reverse;
+  z-index: 0;
+}
+
+@keyframes floatShape {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translate(30px, -30px) scale(1.1); 
+    opacity: 0.8;
+  }
+}
+
+/* Main Card */
+.claim-card {
+  background: #ffffff;
+  padding: 60px 55px;
+  border-radius: 30px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
   width: 100%;
-  max-width: 650px;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-  color: #e5e7eb;
+  max-width: 600px;
+  position: relative;
+  z-index: 1;
+  animation: slideInUp 0.9s ease-out;
 }
 
-/* Header */
-.create-claim-card h2 {
-  font-size: 26px;
-  margin-bottom: 8px;
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.create-claim-card p {
-  font-size: 14px;
-  color: #94a3b8;
-  margin-bottom: 25px;
+/* Animated Gradient Top Border */
+.claim-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 30px 30px 0 0;
+  background-size: 200% 100%;
+  animation: gradientMove 3s ease infinite;
 }
 
-/* Input Group */
-.input-group {
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 0%; }
+}
+
+.claim-card h1 {
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 40px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Form Styling */
+.claim-form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px;
+  gap: 26px;
 }
 
-.input-group label {
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: #cbd5f5;
+.claim-form input,
+.claim-form textarea,
+.claim-form select {
+  width: 100%;
+  padding: 18px 22px;
+  border: 2px solid #e2e8f0;
+  border-radius: 15px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  background: #f8fafc;
+  color: #1e293b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Inputs */
-.input-group input,
-.input-group textarea,
-.input-group select {
-  background: #020617;
-  border: 1px solid #1e293b;
-  padding: 12px;
-  border-radius: 10px;
-  color: #e5e7eb;
-  font-size: 14px;
+.claim-form input::placeholder,
+.claim-form textarea::placeholder {
+  color: #94a3b8;
+}
+
+.claim-form input:hover,
+.claim-form textarea:hover,
+.claim-form select:hover {
+  border-color: #cbd5e0;
+  background: #ffffff;
+}
+
+.claim-form input:focus,
+.claim-form textarea:focus,
+.claim-form select:focus {
   outline: none;
-  transition: 0.3s;
+  border-color: #8b5cf6;
+  background: #ffffff;
+  box-shadow: 
+    0 0 0 4px rgba(139, 92, 246, 0.1),
+    0 6px 25px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
 }
 
-.input-group input::placeholder,
-.input-group textarea::placeholder {
-  color: #64748b;
-}
-
-.input-group input:focus,
-.input-group textarea:focus,
-.input-group select:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.4);
-}
-
-/* Textarea */
-.input-group textarea {
+.claim-form textarea {
+  min-height: 140px;
   resize: vertical;
-  min-height: 120px;
 }
 
-/* File Input */
-.input-group input[type="file"] {
-  padding: 8px;
-  background: #020617;
-  border: 1px dashed #334155;
+.claim-form select {
   cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 50px;
 }
 
 /* Submit Button */
-.submit-btn {
+.claim-form button {
   width: 100%;
-  background: #2563eb;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  color: white;
   border: none;
-  padding: 14px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #ffffff;
-  border-radius: 12px;
+  border-radius: 15px;
+  font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.4s ease;
+  margin-top: 10px;
+  box-shadow: 
+    0 10px 30px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
 }
 
-.submit-btn:hover {
-  background: #1d4ed8;
+.claim-form button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s;
 }
 
-.submit-btn:disabled {
-  background: #334155;
+.claim-form button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.claim-form button:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 18px 45px rgba(102, 126, 234, 0.4),
+    0 0 0 8px rgba(102, 126, 234, 0.1);
+  background-position: 100% 0;
+}
+
+.claim-form button:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.claim-form button:disabled {
+  opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* Error Message */
-.error-text {
-  color: #f87171;
-  font-size: 13px;
-  margin-top: 4px;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .claim-card {
+    padding: 50px 40px;
+    max-width: 90%;
+  }
+
+  .claim-card h1 {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    margin-bottom: 35px;
+  }
+
+  .claim-form input,
+  .claim-form textarea,
+  .claim-form select {
+    padding: 16px 20px;
+    font-size: 15px;
+  }
+
+  .claim-form button {
+    padding: 18px;
+    font-size: 16px;
+  }
 }
 
-/* Success Message */
-.success-text {
-  color: #22c55e;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 15px;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .create-claim-card {
+@media (max-width: 480px) {
+  .claim-page {
     padding: 20px;
   }
 
-  .create-claim-card h2 {
-    font-size: 22px;
+  .claim-card {
+    padding: 40px 30px;
+    border-radius: 25px;
+  }
+
+  .claim-card h1 {
+    font-size: 32px;
+  }
+
+  .claim-form {
+    gap: 22px;
+  }
+
+  .claim-form textarea {
+    min-height: 120px;
   }
 }

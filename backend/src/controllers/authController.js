@@ -8,11 +8,18 @@ const JWT_EXPIRES = process.env.JWT_EXPIRES || "7d";
 
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password, profession, skills = [], experience } = req.body;
+    const { name, email, password, profession, skills = [], experience, domain, proof } = req.body;
     if (!name || !email || !password) return res.status(400).json({ message: "Missing fields" });
 
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).json({ message: "Email already registered" });
+
+    // Convert domain to domainCredibility array
+    let domainCredibility = [];
+    if (domain) {
+      // Set default credibility score of 50 for the user's primary domain
+      domainCredibility = [{ domain: domain, score: 50 }];
+    }
 
     const hash = await bcrypt.hash(password, 10);
     const newUser = await User.create({
@@ -22,6 +29,8 @@ exports.registerUser = async (req, res) => {
       profession,
       skills,
       experience,
+      domainCredibility, // Convert domain to domainCredibility
+      proofURL: proof, // Map proof to proofURL
       // default credibility and isVerified handled by model defaults
     });
 
