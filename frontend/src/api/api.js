@@ -1,10 +1,7 @@
 import axios from "axios";
 
-// Determine base URL based on environment
-const isProduction = process.env.NODE_ENV === 'production';
-const baseURL = isProduction 
-  ? 'https://YOUR_BACKEND_SERVICE_NAME.onrender.com/api'  // Will update after backend deployment
-  : 'http://localhost:5000/api';
+// Use your actual Render backend URL
+const baseURL = 'https://truth-vs-noise-backend.onrender.com/api';
 
 const API = axios.create({
   baseURL: baseURL,
