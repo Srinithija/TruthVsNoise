@@ -1,9 +1,9 @@
-
+<img width="1909" height="896" alt="image" src="https://github.com/user-attachments/assets/ac1dbc31-5c06-4315-9660-ed1f2c78924e" />
 # Truth vs Noise
 
 A credibility-weighted community platform to evaluate facts, filter misinformation, and amplify truth.
 
-## 📋 Project Overview
+## Project Overview
 
 Truth vs Noise is a full-stack MERN (MongoDB, Express.js, React, Node.js) application designed to combat misinformation by implementing a dual voting system:
 - **Raw Community Votes** - Popularity-based voting where every vote counts as 1
@@ -11,12 +11,11 @@ Truth vs Noise is a full-stack MERN (MongoDB, Express.js, React, Node.js) applic
 
 The platform helps users distinguish between what the general population thinks (popularity) and what domain experts believe (truth).
 
-## 🎯 Key Features
+## Key Features
 
 ### User Authentication & Profiles
 - User registration with profession and domain expertise
 - JWT-based authentication
-- Role-based access control (User/Admin)
 - Domain credibility scoring system
 
 ### Claim Management
@@ -35,11 +34,6 @@ The platform helps users distinguish between what the general population thinks 
 - Base credibility score for all users
 - Domain-specific credibility scores
 - Cross-domain expertise transfer matrix
-
-### Admin Panel
-- User verification and credibility management
-- Domain expertise assignment
-- System oversight and moderation
 
 ## 🏗️ Tech Stack
 
@@ -149,7 +143,7 @@ truth-vs-noise/
    - Frontend: http://localhost:5173
    - Backend API: http://localhost:5000
 
-## 📊 Voting System Explained
+## Voting System Explained
 
 ### Raw Voting (Popularity-Based)
 - Every user vote counts as 1 point
@@ -182,8 +176,7 @@ Cross-domain expertise transfer:
 
 - Password hashing with bcrypt
 - JWT token-based authentication
-- Role-based access control
-- Input validation and sanitization
+=- Input validation and sanitization
 - Protected routes and middleware
 
 ## 📈 Future Enhancements
@@ -195,8 +188,21 @@ Cross-domain expertise transfer:
 - Enhanced admin dashboard
 - Machine learning for credibility scoring
 
+<img width="1909" height="896" alt="image" src="https://github.com/user-attachments/assets/aee2021d-4855-4f2e-9adf-45698a9f8158" />
+
+
+<img width="855" height="911" alt="image" src="https://github.com/user-attachments/assets/6c29b206-53b9-41a6-9a5f-dc0f46905937" />
+
+<img width="1867" height="714" alt="image" src="https://github.com/user-attachments/assets/4bf245c9-7084-4df2-bbe2-b103f374d637" />
+
+<img width="1857" height="829" alt="image" src="https://github.com/user-attachments/assets/d1e33b2e-c8b1-43e8-8642-d64854bf49e4" />
 
 
 
 
-You can save this as `README.md` in your project root directory. This will help anyone who wants to understand, use, or contribute to your Truth vs Noise project.
+
+
+
+
+
+
